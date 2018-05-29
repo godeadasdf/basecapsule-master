@@ -92,7 +92,7 @@ class CameraScanner : FrameLayout, BaseScanner, IScanCallback, LifecycleObserver
                 }
             }
         }
-        input_text.setOnClickListener {
+        input_icon.setOnClickListener {
             if (attachedActivity != null) {
                 when (isInputting) {
                     true -> {
@@ -113,11 +113,13 @@ class CameraScanner : FrameLayout, BaseScanner, IScanCallback, LifecycleObserver
     }
 
     private fun showInput() {
+        input_icon.setImageResource(R.drawable.keyboard_hide)
         val intent = Intent(attachedActivity, InputActivity::class.java)
         attachedActivity?.startActivityForResult(intent, REQUEST_SUBMIT)
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        input_icon.setImageResource(R.drawable.keyboard_show)
         if (data == null)
             return
         if (requestCode == REQUEST_SUBMIT) {
