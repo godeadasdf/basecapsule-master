@@ -209,10 +209,10 @@ class CameraScanner : FrameLayout, BaseScanner, IScanCallback, LifecycleObserver
     }
 
     override fun onScanTimeout() {
-        scanResultPublisher.onError(Exception("onScanTimeout"))
+//        scanResultPublisher.onError(Exception("onScanTimeout"))
     }
 
     override fun onScanError() {
-        scanResultPublisher.onError(Exception("onScanError"))
+//        scanResultPublisher.onError(Exception("onScanError"))
     }
 }
