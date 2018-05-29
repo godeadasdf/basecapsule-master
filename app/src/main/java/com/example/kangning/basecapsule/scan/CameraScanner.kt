@@ -33,7 +33,7 @@ import com.example.kangning.basecapsule.InputActivity.Companion.SUMMIT_MESSAGE
  * 4.startScan:开始扫描返回Observable<String>
  *   pauseScan:暂停扫描 不停止实时取景  PublishSubject停止发射String
  *   stopScan:停止扫描  停止实时取景
- *5.activity 需要implements  KeyboardHeightObserver 以获取键盘高度
+ * 5.activity onActivityResult需要调用CameraScanner的onActivityResult方法，用以获得提交的string
  *
  **/
 
@@ -124,39 +124,11 @@ class CameraScanner : FrameLayout, BaseScanner, IScanCallback, LifecycleObserver
             return
         if (requestCode == REQUEST_SUBMIT) {
             val content = data!!.getStringExtra(SUMMIT_MESSAGE)
-            Log.d("ssssssss", data!!.getStringExtra(SUMMIT_MESSAGE))
             if (content !== "") {
                 scanResultPublisher.onNext(content)
             }
         }
     }
-
-
-    /*   fun onKeyBoardHeight(keyboardHeight: Int) {
-           if (isInputting && keyboardHeight == 0) {
-               bottom_input_layout.bottom = 0
-               input_text.setImageResource(R.drawable.keyboard_show)
-           } else {
-               bottom_input_layout.top = height - keyboardHeight - bottom_input_layout.height
-           }
-       }
-   */
-
-/*    */
-    /**
-     * EditText获取焦点并显示软键盘
-     *//*
-    private fun showSoftInputFromWindow(focusable: Boolean) {
-        input_edit.isFocusable = focusable
-        input_edit.isFocusableInTouchMode = focusable
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (focusable === true) {
-            input_edit.requestFocus()
-            imm.showSoftInput(input_edit, InputMethodManager.SHOW_IMPLICIT)
-        } else {
-            imm.hideSoftInputFromWindow(input_edit.windowToken, 0)
-        }
-    }*/
 
 
     val attachLifecycle: (Lifecycle) -> Unit = {
