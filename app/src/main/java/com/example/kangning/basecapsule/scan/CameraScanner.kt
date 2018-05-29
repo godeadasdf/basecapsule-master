@@ -18,9 +18,7 @@ import com.ofo.scan.views.ScanViewAdapter
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.camera_scanner_view.view.*
-import android.view.inputmethod.InputMethodManager
-import com.example.kangning.basecapsule.InputActivity
-import com.example.kangning.basecapsule.InputActivity.Companion.SUMMIT_MESSAGE
+import com.example.kangning.basecapsule.scan.InputActivity.Companion.SUMMIT_MESSAGE
 
 
 /**

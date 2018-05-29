@@ -12,8 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".InputActivity"
+            android:name=".scan.InputActivity"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Translucent" ></activity>
     </application>
 

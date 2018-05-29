@@ -1,13 +1,15 @@
-package com.example.kangning.basecapsule
+package com.example.kangning.basecapsule.scan
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.inputmethod.InputMethodManager
 
 import kotlinx.android.synthetic.main.activity_input.*
 import android.content.Intent
+import android.view.KeyEvent
+import android.widget.TextView
+import com.example.kangning.basecapsule.R
 
 
 class InputActivity : AppCompatActivity() {
@@ -20,7 +22,11 @@ class InputActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input)
         supportActionBar?.hide()
-        showSoftInputFromWindow(true)
+        input_edit.setBackListener(object : BackHandleEditText.BackListener {
+            override fun back(textView: TextView) {
+                finish()
+            }
+        })
         submit.setOnClickListener {
             val mIntent = Intent()
             mIntent.putExtra(SUMMIT_MESSAGE, input_edit.text.toString())
@@ -29,6 +35,10 @@ class InputActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        showSoftInputFromWindow(true)
+    }
 
     /**
      * EditText获取焦点并显示软键盘
@@ -48,5 +58,6 @@ class InputActivity : AppCompatActivity() {
     override fun onBackPressed() {
         finish()
     }
+
 }
 
