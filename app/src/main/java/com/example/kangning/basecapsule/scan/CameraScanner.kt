@@ -5,6 +5,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
+import android.content.Intent
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,8 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.camera_scanner_view.view.*
 import android.view.inputmethod.InputMethodManager
+import com.example.kangning.basecapsule.InputActivity
+import com.example.kangning.basecapsule.InputActivity.Companion.SUMMIT_MESSAGE
 
 
 /**
@@ -95,7 +98,7 @@ class CameraScanner : FrameLayout, BaseScanner, IScanCallback, LifecycleObserver
             if (attachedActivity != null) {
                 when (isInputting) {
                     true -> {
-                        hideInput()
+
                     }
                     false -> {
                         showInput()
@@ -104,43 +107,45 @@ class CameraScanner : FrameLayout, BaseScanner, IScanCallback, LifecycleObserver
             }
         }
 
-        submit.setOnClickListener {
-            hideInput()
-            scanResultPublisher.onNext(input_edit.text.toString())
-            input_edit.setText("")
-        }
-
     }
 
+
+    companion object {
+        private const val REQUEST_SUBMIT = 0x0000001
+    }
 
     private fun showInput() {
-        isInputting = true
-        input_text.setImageResource(R.drawable.keyboard_hide)
-        bottom_input_layout.visibility = View.VISIBLE
-        showSoftInputFromWindow(true)
+        val intent = Intent(attachedActivity, InputActivity::class.java)
+        attachedActivity?.startActivityForResult(intent, REQUEST_SUBMIT)
     }
 
-    private fun hideInput() {
-        isInputting = false
-        input_text.setImageResource(R.drawable.keyboard_show)
-        bottom_input_layout.visibility = View.GONE
-        showSoftInputFromWindow(false)
-    }
-
-
-    fun onKeyBoardHeight(keyboardHeight: Int) {
-        if (isInputting && keyboardHeight == 0) {
-            bottom_input_layout.bottom = 0
-            input_text.setImageResource(R.drawable.keyboard_show)
-        } else {
-            bottom_input_layout.top = height - keyboardHeight - bottom_input_layout.height
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (data == null)
+            return
+        if (requestCode == REQUEST_SUBMIT) {
+            val content = data!!.getStringExtra(SUMMIT_MESSAGE)
+            Log.d("ssssssss", data!!.getStringExtra(SUMMIT_MESSAGE))
+            if (content !== "") {
+                scanResultPublisher.onNext(content)
+            }
         }
     }
 
 
+    /*   fun onKeyBoardHeight(keyboardHeight: Int) {
+           if (isInputting && keyboardHeight == 0) {
+               bottom_input_layout.bottom = 0
+               input_text.setImageResource(R.drawable.keyboard_show)
+           } else {
+               bottom_input_layout.top = height - keyboardHeight - bottom_input_layout.height
+           }
+       }
+   */
+
+/*    */
     /**
      * EditText获取焦点并显示软键盘
-     */
+     *//*
     private fun showSoftInputFromWindow(focusable: Boolean) {
         input_edit.isFocusable = focusable
         input_edit.isFocusableInTouchMode = focusable
@@ -151,7 +156,7 @@ class CameraScanner : FrameLayout, BaseScanner, IScanCallback, LifecycleObserver
         } else {
             imm.hideSoftInputFromWindow(input_edit.windowToken, 0)
         }
-    }
+    }*/
 
 
     val attachLifecycle: (Lifecycle) -> Unit = {

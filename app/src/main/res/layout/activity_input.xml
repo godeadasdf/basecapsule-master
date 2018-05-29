@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kangning.basecapsule.InputActivity"
+    android:focusable="true">
+
+    <LinearLayout
+        android:id="@+id/bottom_input_layout"
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_height="54dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:focusable="true">
+
+       <LinearLayout
+           android:layout_width="60dp"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           android:gravity="center">
+           
+           <ImageView
+               android:layout_width="22dp"
+               android:layout_height="16dp"
+               android:src="@drawable/keyboard"/>
+           
+           <TextView
+               android:layout_marginTop="6dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="数字输入"
+               android:textSize="9sp"
+               android:textColor="#666666"
+               />
+           
+       </LinearLayout>
+        <EditText
+            android:background="#ffffff"
+            android:id="@+id/input_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:focusable="true" />
+
+        <Button
+            android:layout_marginRight="10dp"
+            android:id="@+id/submit"
+            android:layout_width="80dp"
+            android:layout_height="36dp"
+            android:background="@drawable/button_yellow_back"
+            android:text="确认"
+            android:textColor="#292929"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</RelativeLayout>
+
+

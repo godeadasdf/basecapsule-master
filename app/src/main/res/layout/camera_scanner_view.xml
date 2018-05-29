@@ -89,35 +89,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/bottom_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/input_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:focusable="true" />
-
-                <Button
-                    android:id="@+id/submit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="提交" />
-            </LinearLayout>
-        </LinearLayout>
 
 
     </RelativeLayout>

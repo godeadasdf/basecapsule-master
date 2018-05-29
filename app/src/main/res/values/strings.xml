@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">basecapsule</string>
+    <string name="title_activity_input">InputActivity</string>
 </resources>
