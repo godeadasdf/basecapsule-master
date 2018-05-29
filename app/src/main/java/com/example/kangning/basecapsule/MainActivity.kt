@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         camera_scanner.attachLifecycle(lifecycle)
         camera_scanner.attachedActivity = this
 
+        GunScanner.attachLifecycle(lifecycle)
+
         camera_scanner.startScan().subscribe {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }

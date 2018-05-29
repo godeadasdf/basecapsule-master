@@ -1,6 +1,7 @@
 package com.example.kangning.basecapsule.scan
 
 import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -17,10 +18,13 @@ import android.util.Log
 /**
  * Created by kangning on 2018/5/28.
  */
-object GunScanner : BaseScanner {
+object GunScanner : BaseScanner, LifecycleObserver {
 
     var context: Context? = null
+    lateinit var attachedLifecycle: Lifecycle
+
     private lateinit var scanManager: ScanManager
+
     var isScanning = false
     var isFailed = false
 
@@ -39,6 +43,15 @@ object GunScanner : BaseScanner {
             isFailed = true
         }
 
+    }
+
+    fun attachLifecycle(lifecycle: Lifecycle) {
+        this.attachedLifecycle = lifecycle
+        lifecycle.addObserver(this)
+    }
+
+    private fun detachLifecycle() {
+        attachedLifecycle.removeObserver(this)
     }
 
     fun fetchScanResult(context: Context): Observable<String> {
@@ -71,6 +84,7 @@ object GunScanner : BaseScanner {
         context = null
         context?.unregisterReceiver(receiver)
         isScanning = false
+        detachLifecycle()
     }
 
     private val receiver = object : BroadcastReceiver() {
