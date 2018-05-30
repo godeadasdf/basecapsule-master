@@ -136,6 +136,7 @@ class CameraScanner : FrameLayout, BaseScanner, IScanCallback, LifecycleObserver
         it.addObserver(this)
     }
 
+
     private val detachLifecycle: () -> Unit = {
         lifecycle.removeObserver(this)
     }
